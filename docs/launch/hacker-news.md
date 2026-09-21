@@ -18,4 +18,4 @@ The package is intentionally narrow. It focuses on:
 
 Mail no longer reads Apple Mail databases or uses AppleScript helpers; Himalaya is the protocol source of truth and the native app remains the review surface.
 
-Repo: https://github.com/longbiaochen/apple-use
+Repo: https://github.com/felixlark/apple-use

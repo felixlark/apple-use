@@ -62,4 +62,4 @@ For email acceptance, check IMAP and SMTP sequentially, then generate a local RF
 - Do not use provider webmail, `fruitmail`, AppleScript/`osascript`, ad-hoc Accessibility scripts, private Mail APIs, or direct Mail database access.
 - Never send email during infrastructure or skill acceptance.
 
-Repository: [github.com/longbiaochen/apple-use](https://github.com/longbiaochen/apple-use)
+Repository: [github.com/longbiaochen/apple-use](https://github.com/felixlark/apple-use)

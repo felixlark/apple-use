@@ -21,4 +21,4 @@ The repo includes install docs, permission guidance, usage recipes, and launch c
 
 Mail now stays on the native app surface and does not read the Envelope Index or use AppleScript helpers.
 
-Repo: https://github.com/longbiaochen/apple-use
+Repo: https://github.com/felixlark/apple-use

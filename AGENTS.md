@@ -33,8 +33,8 @@
 - Preserve Notes and Reminders behavior unless the task explicitly changes it.
 - Treat `~/.openclaw` as separate host state unless the task explicitly targets it.
 
-## Worktree Policy
+## Development Workflow
 
-- Follow the global `~/.codex/AGENTS.md` main-first development rule.
+- Follow the global `~/.codex/AGENTS.md` and workspace `/Users/longbiao/Documents/AGENTS.md` development workflow; use the canonical checkout with one writer and do not create new worktrees.
 - Start with `git status --short --branch`, preserve unrelated changes, run exact checks, then commit and push the scoped change.
-- Use one task branch per worktree only when the global worktree exceptions apply.
+- Use a task branch in the canonical checkout only when needed; do not create new worktrees or clean pre-existing residue without a separate exact user request.

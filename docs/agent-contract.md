@@ -1,20 +1,7 @@
-# Apple Use Agent Contract
+# Cross-agent Apple contract
 
-The canonical behavior lives in:
+Use [apple-ecosystem](../apple-ecosystem/SKILL.md) as the routing authority. Calendar and Reminders use public EventKit; other Apple apps use their own verified public framework/connector. Do not automate app UI or read private databases as fallback.
 
-- `apple-ecosystem`
-- `apple-mail`
-- `apple-notes`
-- `apple-reminders`
+Discover actual installed tools and permissions. Do not equate source code, packaging, installation, host connection or live acceptance. Keep external authorization, sending and deletion requirements unchanged.
 
-Root adapters and the `apple-use` plugin must mirror these skills.
-
-## Shared invariants
-
-- Keep workflows local-first on macOS.
-- Route Notes to `apple-notes` and `memo`.
-- Route Reminders to `apple-reminders` and `remindctl`.
-- Route every email task to `apple-mail`; use Himalaya for protocol operations, Apple Mail for review, and `macos-use` only for native Mail edge behavior.
-- The plugin must not expose `apple_mail_*` tools or use `fruitmail`, AppleScript/`osascript` Mail helpers, private APIs, or direct Mail databases.
-- Follow `apple-mail` for send authorization, bounded traversal, compose-window counting, attachments, and sent-state verification.
-- Confirm destructive or ambiguous Notes and Reminders actions.
+For GitHub-backed actions, search by source URL before writing, preserve stable identity, read back the actual Apple record, and return evidence to the original issue. Complete/delete in an app must not erase historical facts. Keep paused services paused.

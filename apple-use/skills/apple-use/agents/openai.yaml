@@ -1,4 +1,4 @@
 interface:
-  display_name: "Apple Use"
-  short_description: "Use local Apple Notes and Reminders tools"
-  default_prompt: "Use $apple-use for Apple Notes or Reminders. Route email to the Himalaya-first $apple-mail workflow."
+  display_name: "apple-use"
+  short_description: "Use public Apple APIs and EventKit with deduplication and readback"
+  default_prompt: "Use $apple-use to manage Apple app data through public APIs and verify the result."

@@ -1,24 +1,13 @@
-# Apple Use Workflows
+# Apple Use workflows
 
-## Install
+## Operating
 
-Install this plugin only for Apple Notes and Reminders:
+Use the shared apple-ecosystem and apple-reminders skills. First check loaded tools; when the MCP is absent, use the verified public EventKit CLI. Check status before querying data. Creation supports URL and address alarms; edits support URL, not location changes. Unknown outcomes are reconciled by source URL before retry.
 
-```bash
-cd /path/to/apple-use/apple-use
-./scripts/install-local-plugin.sh
-```
+## Installation and verification
 
-## Tool routing
+Use the repository's existing local plugin installation process in a host authorized to write its plugin directory. Inspect the install script first. Do not reset privacy settings, change security policy or restart paused services to make installation work.
 
-- `apple_doctor`: Notes/Reminders dependency and permission checks
-- `apple_notes_*`: Apple Notes operations
-- `apple_reminders_*`: Apple Reminders operations
-- any Mail or email request: standalone `apple-mail` skill with Himalaya first; `macos-use` only for native Mail edge behavior
+Run `npm --prefix apple-use run check` and `node --test apple-use/tests/reminders.test.mjs`. Then verify real loaded MCP tools and EventKit authorization. Unit tests validate argument forwarding and failure handling; live data persistence, cross-device sync and notification delivery require separate acceptance.
 
-The retired `apple_mail_*` tools and their `fruitmail`, AppleScript, and Mail database implementations must not be restored as fallbacks.
-
-## Safety
-
-- Confirm destructive or ambiguous Notes and Reminders actions.
-- Follow `apple-mail` for all Mail authorization and verification rules.
+`apple_doctor` only checks executable presence and public permission status. Avoid old versions that probe Notes using AppleScript or enumerate mail accounts. Email routes to existing apple-mail/Himalaya or authorized connector. Notes requires a verified public/Shortcuts adapter.

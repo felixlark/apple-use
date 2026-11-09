@@ -3,14 +3,9 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { z } from "zod";
 import { runDoctor } from "./lib/doctor.mjs";
 import {
-  createNote,
-  deleteNote,
-  listNotes,
-  searchNotes,
-  updateNote,
-} from "./lib/notes.mjs";
-import {
   addReminder,
+  remindersStatus,
+  searchReminders,
   authorizeReminders,
   completeReminder,
   deleteReminder,
@@ -45,64 +40,9 @@ server.tool("apple_doctor", "Check local Apple CLI dependencies and permissions.
   toContent(await runDoctor()),
 );
 
-server.tool(
-  "apple_notes_list",
-  "List Apple Notes, optionally filtered by folder.",
-  {
-    folder: z.string().optional(),
-    limit: z.number().int().min(1).max(200).default(50),
-    includePreview: z.boolean().default(false),
-  },
-  async (input) => toContent(await listNotes(input)),
-);
+server.tool("apple_reminders_status", "Check EventKit authorization without prompting or reading reminders.", async () => toContent(await remindersStatus()));
 
-server.tool(
-  "apple_notes_search",
-  "Search Apple Notes by title or preview text.",
-  {
-    query: z.string(),
-    folder: z.string().optional(),
-    limit: z.number().int().min(1).max(100).optional(),
-  },
-  async (input) => toContent(await searchNotes(input)),
-);
-
-server.tool(
-  "apple_notes_create",
-  "Create a new Apple Note.",
-  {
-    title: z.string(),
-    body: z.string().default(""),
-    folder: z.string().optional(),
-  },
-  async (input) => toContent(await createNote(input)),
-);
-
-server.tool(
-  "apple_notes_update",
-  "Rename or replace the body of an Apple Note.",
-  {
-    note: z.string(),
-    folder: z.string().optional(),
-    newTitle: z.string().optional(),
-    body: z.string().optional(),
-  },
-  async (input) => toContent(await updateNote(input)),
-);
-
-server.tool(
-  "apple_notes_delete",
-  "Delete an Apple Note by exact title, optionally scoped to a folder.",
-  {
-    note: z.string(),
-    folder: z.string().optional(),
-    confirm: z.boolean().default(false),
-  },
-  async (input) => {
-    withDeleteConfirmation(input.confirm, "apple_notes_delete");
-    return toContent(await deleteNote(input));
-  },
-);
+server.tool("apple_reminders_search", "Find reminders by title, notes or source URL, including completed items by default for deduplication.", { query: z.string().min(1), list: z.string().optional(), completed: z.boolean().default(true) }, async (input) => toContent(await searchReminders(input)));
 
 server.tool(
   "apple_reminders_authorize",
@@ -131,9 +71,13 @@ server.tool(
 
 server.tool(
   "apple_reminders_add",
-  "Add an Apple Reminder.",
+  "Add an Apple Reminder through EventKit. Check status and search by source URL first. Location is an address; radius/leaving require location.",
   {
     title: z.string(),
+    url: z.string().url().optional(),
+    location: z.string().min(1).optional(),
+    radius: z.number().positive().optional(),
+    leaving: z.boolean().optional(),
     list: z.string().optional(),
     due: z.string().optional(),
     notes: z.string().optional(),
@@ -152,6 +96,8 @@ server.tool(
     due: z.string().optional(),
     notes: z.string().optional(),
     priority: z.enum(["none", "low", "medium", "high"]).optional(),
+    url: z.string().url().optional(),
+    clearUrl: z.boolean().optional(),
     clearDue: z.boolean().optional(),
     complete: z.boolean().optional(),
     incomplete: z.boolean().optional(),
@@ -183,3 +129,4 @@ server.tool(
 
 const transport = new StdioServerTransport();
 await server.connect(transport);
+

@@ -1,25 +1,6 @@
 ---
 name: apple-reminders
-description: Manage Apple Reminders via the `remindctl` CLI on macOS. Use when the user wants to list, add, edit, complete, or delete reminders or reminder lists on a Mac.
-homepage: https://github.com/steipete/remindctl
+description: Manage Apple Reminders with the public EventKit-backed remindctl CLI or Apple Use MCP, including list, search, source URL deduplication, location alerts, edits and API readback. Use for reminders that the user interacts with on Apple devices.
 ---
 
-# Apple Reminders
-
-Use `remindctl` to manage Apple Reminders directly from the terminal.
-
-If the `apple-use` Codex plugin is installed, prefer its `apple_reminders_*` MCP tools first. Fall back to `remindctl` when the plugin is unavailable.
-
-Setup:
-
-- Check the CLI: `remindctl --help`
-- Check authorization: `remindctl status`
-- If needed, request access: `remindctl authorize`
-
-Guidance:
-
-- If the user says "remind me", clarify whether they want an Apple Reminders item or an agent-level alert/automation.
-- Prefer JSON output when you need structured parsing.
-- Confirm destructive deletes before executing them.
-
-Read [references/usage.md](./references/usage.md) for command examples and accepted date formats.
+Follow the canonical workflow in [Reminders workflow](../apple-use/references/reminders-workflow.md).

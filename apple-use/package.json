@@ -7,7 +7,8 @@
   "scripts": {
     "start": "node ./src/server.mjs",
     "check": "node --check ./src/server.mjs && node --check ./scripts/print-codex-config.mjs",
-    "doctor": "node ./scripts/run-doctor.mjs"
+    "doctor": "node ./scripts/run-doctor.mjs",
+    "test": "node --test tests/reminders.test.mjs"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.17.4",

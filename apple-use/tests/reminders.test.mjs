@@ -1,0 +1,12 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {addReminder, editReminder, searchReminders, remindersStatus} from '../src/lib/reminders.mjs';
+function spy(){ const calls=[];return {calls,run:(cmd,args)=>{calls.push({cmd,args});return {status:0,stdout:'{"id":"existing-id"}',stderr:''};}}; }
+test('creation forwards source URL and arrival geofence as literal argv', async()=>{const s=spy();await addReminder({title:'餐厅 $(no-shell)',location:'上海滨江大道1833号',radius:141,url:'https://github.com/example/admin/issues/1'},s.run);assert.deepEqual(s.calls[0],{cmd:'remindctl',args:['add','--title','餐厅 $(no-shell)','--url','https://github.com/example/admin/issues/1','--location','上海滨江大道1833号','--radius','141','--json','--no-input']});});
+test('invalid geofence never invokes CLI',async()=>{const s=spy();for(const v of [{radius:100},{leaving:true},{location:'address',radius:-1}])await assert.rejects(addReminder(v,s.run));assert.equal(s.calls.length,0);});
+test('departure only adds leaving when requested',async()=>{const s=spy();await addReminder({title:'Leave',location:'address',leaving:true},s.run);assert.ok(s.calls[0].args.includes('--leaving'));});
+test('dedupe search includes completed and constrains list',async()=>{const s=spy();await searchReminders({query:'source-url',list:'生活'},s.run);assert.deepEqual(s.calls[0].args,['search','source-url','--list','生活','--completed','--json','--no-input']);});
+test('URL edit preserves unrelated fields; conflict stops before mutation',async()=>{const s=spy();await editReminder({id:'existing-id',url:'https://example.com'},s.run);assert.deepEqual(s.calls[0].args,['edit','existing-id','--url','https://example.com','--json','--no-input']);await assert.rejects(editReminder({id:'existing-id',url:'https://example.com',clearUrl:true},s.run));assert.equal(s.calls.length,1);});
+test('status does not authorize and failed writes are propagated without retry',async()=>{const s=spy();await remindersStatus(s.run);assert.deepEqual(s.calls[0].args,['status','--json','--no-input']);let attempts=0;await assert.rejects(addReminder({title:'test'},()=>{attempts++;return {status:1,stdout:'',stderr:'permission denied'};}),/permission denied/);assert.equal(attempts,1);});
+
+test('explicit empty notes clears notes rather than silently ignoring input',async()=>{const s=spy();await editReminder({id:'id',notes:''},s.run);assert.deepEqual(s.calls[0].args,['edit','id','--notes','','--json','--no-input']);});

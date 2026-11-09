@@ -1,4 +1,4 @@
 interface:
-  display_name: "Apple Reminders"
-  short_description: "List, add, and manage Apple Reminders on macOS"
-  default_prompt: "Use $apple-reminders to manage Apple Reminders with local tools."
+  display_name: "apple-reminders"
+  short_description: "Use public Apple APIs and EventKit with deduplication and readback"
+  default_prompt: "Use $apple-reminders to manage Apple app data through public APIs and verify the result."

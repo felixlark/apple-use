@@ -1,31 +1,20 @@
 ---
 name: apple-use
-description: Use the Apple Use MCP server in Codex for local Apple Notes, Reminders, and environment doctor workflows on macOS. Route every email task to the standalone Himalaya-first apple-mail skill instead of this plugin.
+description: Use Apple Use public-API tools for EventKit-backed Reminders and route other Apple apps to their supported framework or connector. Check permissions, deduplicate by source URL, and read back writes without UI automation.
 ---
 
 # Apple Use
 
-Use this skill when the `apple-use` Codex plugin is installed for Notes or Reminders. Do not use it for Mail execution.
+Load the shared [Apple ecosystem routing](../../references/apple-app-routing.md) and [Reminders workflow](../../references/reminders-workflow.md).
 
-What it packages:
+- `apple_doctor`: executable presence and EventKit authorization only; no unrelated personal data.
+- `apple_reminders_status`: permission status without prompting.
+- `apple_reminders_search`: title/notes/URL lookup including completed items by default.
+- `apple_reminders_add`: title/list/notes/URL plus address, radius, leaving.
+- `apple_reminders_edit`: stable ID and scoped edits including source URL; location edit is not exposed.
+- `apple_reminders_show` and `apple_reminders_lists`: public-API readback.
+- `apple_reminders_authorize`: normal system prompt when needed; never claims consent on the user's behalf.
 
-- an MCP server with Apple Notes, Reminders, and doctor tools
-- the same local-first safety defaults as the canonical app skill folders in this repo
-- the existing supported Apple CLIs for Notes and Reminders
+Notes tools are not registered until an approved public adapter is implemented. Email uses the standalone `apple-mail` workflow.
 
-Use the MCP server first:
-
-- `apple_doctor` to inspect Notes and Reminders dependencies and permissions
-- `apple_notes_*` for structured Apple Notes operations
-- `apple_reminders_*` for Apple Reminders operations, including authorization checks
-
-For any email request, load `apple-mail` and use Himalaya as the primary execution surface. Use `macos-use` only for Apple-Mail-only features or UI recovery. The old `apple_mail_*` tools, `fruitmail`, AppleScript helpers, and Mail database path are retired.
-
-Rules:
-
-- Keep workflows local-first on macOS.
-- Confirm destructive or ambiguous Notes and Reminders writes before executing them.
-- Use `apple_doctor` when Notes or Reminders permissions appear unhealthy.
-- If the plugin is unavailable, fall back to the canonical Notes or Reminders skill folders in the repo root.
-
-Read [../../references/workflows.md](../../references/workflows.md) for install steps and routing.
+A source update does not install or connect this server. Verify loaded tool names and actual host authorization before claiming live support. See [workflows](../../references/workflows.md).

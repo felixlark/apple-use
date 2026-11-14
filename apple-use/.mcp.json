@@ -7,7 +7,7 @@
         "./src/server.mjs"
       ],
       "cwd": ".",
-      "note": "Local Apple Notes, Reminders, Mail, and doctor MCP server for Codex."
+      "note": "Local EventKit Reminders and environment doctor MCP server for Codex."
     }
   }
 }

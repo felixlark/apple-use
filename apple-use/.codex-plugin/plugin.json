@@ -1,7 +1,7 @@
 {
   "name": "apple-use",
   "version": "0.1.0",
-  "description": "Single-install Codex plugin for Apple Notes, Reminders, and Mail on macOS with a local MCP server and canonical Apple skills.",
+  "description": "Codex-local EventKit Reminders tools and routing to supported Apple app connectors.",
   "author": {
     "name": "Longbiao Chen"
   },
@@ -10,8 +10,8 @@
   "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "Apple Use",
-    "shortDescription": "Local Apple Notes, Reminders, and Mail tools for Codex",
-    "longDescription": "Packages the canonical apple-use workflows into one Codex-local plugin. Installs an MCP server for Apple Notes, Reminders, Mail, and environment doctor checks while preserving the underlying skill documentation and local-first safety model.",
+    "shortDescription": "EventKit Reminders and supported Apple app workflows",
+    "longDescription": "Provides local EventKit-backed Reminders tools and environment checks. Routes Calendar, Notes and other Apple app requests to supported public interfaces; email uses the standalone apple-mail workflow.",
     "developerName": "Longbiao Chen",
     "category": "Productivity",
     "capabilities": [
@@ -20,9 +20,9 @@
       "Write"
     ],
     "defaultPrompt": [
-      "Run the Apple Use doctor and summarize the local Apple toolchain status",
-      "Use local Apple tools to search Mail, inspect reminders, or work with notes",
-      "Draft an email in Mail.app and only send it after explicit confirmation"
+      "Check EventKit Reminders authorization and local Apple toolchain status",
+      "Search reminders, including completed items, before creating a reminder",
+      "Use supported public APIs or connected tools for the requested Apple app"
     ]
   }
 }

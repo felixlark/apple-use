@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Codex-local Apple Notes and Reminders plugin. Email routes to the standalone Himalaya-first apple-mail skill.",
+  "description": "Codex-local EventKit Reminders plugin; other Apple apps use supported connectors.",
   "scripts": {
     "start": "node ./src/server.mjs",
     "check": "node --check ./src/server.mjs && node --check ./scripts/print-codex-config.mjs",
@@ -11,7 +11,7 @@
     "test": "node --test tests/reminders.test.mjs"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.17.4",
-    "zod": "^3.24.1"
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "zod": "^4.6.7"
   }
 }

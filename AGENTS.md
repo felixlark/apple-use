@@ -2,7 +2,7 @@
 
 ## Repo Scope
 
-- Owner/escalation: Longbiao for local macOS tooling.
+- Owner/escalation: felixlark for local macOS tooling.
 - This legacy repo is retained for explicit maintenance only and is not installed into Codex by default.
 - The plugin owns Apple Notes and Reminders workflows. Every email task routes to the standalone global `apple-mail` skill, with Himalaya as the primary protocol surface and Apple Mail as the review surface.
 - Do not reintroduce `apple_mail_*`, `fruitmail`, AppleScript/`osascript` Mail automation, or direct Mail database reads.

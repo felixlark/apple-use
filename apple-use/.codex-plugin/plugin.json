@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Codex-local EventKit Reminders tools and routing to supported Apple app connectors.",
   "author": {
-    "name": "Longbiao Chen"
+    "name": "felixlark"
   },
   "license": "MIT",
   "skills": "./skills/",
@@ -12,7 +12,7 @@
     "displayName": "Apple Use",
     "shortDescription": "EventKit Reminders and supported Apple app workflows",
     "longDescription": "Provides local EventKit-backed Reminders tools and environment checks. Routes Calendar, Notes and other Apple app requests to supported public interfaces; email uses the standalone apple-mail workflow.",
-    "developerName": "Longbiao Chen",
+    "developerName": "felixlark",
     "category": "Productivity",
     "capabilities": [
       "Interactive",
